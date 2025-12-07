@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SelectBook – Login</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #222;
+    }
+    .navbar {
+      background: #0d47a1;
+      color: #fff;
+      padding: 10px 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar-title {
+      font-size: 18px;
+    }
+    .navbar-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 12px;
+      font-size: 14px;
+    }
+    .auth-wrapper {
+      max-width: 400px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 20px 18px 24px;
+    }
+    .auth-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .auth-sub {
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #d0d5e2;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    button {
+      flex: 1;
+      padding: 9px 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #signupBtn {
+      background: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #90caf9;
+    }
+    #loginBtn {
+      background: #0d47a1;
+      color: #fff;
+    }
+    #logoutBtn {
+      background: #ff7043;
+      color: #fff;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .status {
+      margin-top: 12px;
+      font-size: 13px;
+      min-height: 18px;
+    }
+    .status.error { color: #d32f2f; }
+    .status.ok { color: #2e7d32; }
+    .user-box {
+      margin-top: 14px;
+      padding: 10px;
+      background: #e8f5e9;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Simple Navbar -->
+  <div class="navbar">
+    <div class="navbar-title">SelectBook</div>
+    <div class="navbar-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <!-- Auth Card -->
+  <div class="auth-wrapper">
+    <div class="auth-title">Student Login / Signup</div>
+    <div class="auth-sub">Email और Password से Account बनाएं या Login करें।</div>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="example@mail.com" />
+
+    <label for="password">Password (कम से कम 6 अक्षर)</label>
+    <input type="password" id="password" placeholder="******" />
+
+    <div class="btn-row">
+      <button id="signupBtn">New User / Signup</button>
+      <button id="loginBtn">Login</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div id="userBox" class="user-box hidden">
+      <div><b>Login हुआ:</b> <span id="userEmail"></span></div>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <!-- Firebase Auth Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+    // 👉 यहाँ अपना firebaseConfig डालो (जो तुमने test-engine.html में डाला था)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBVNl7TyK2QKo-jrwnodZQ6RN8Ib4zqT6M",
+      authDomain: "selectbook-test.firebaseapp.com",
+      projectId: "selectbook-test",
+      storageBucket: "selectbook-test.appspot.com",
+      messagingSenderId: "325583536202",
+      appId: "1:325583536202:web:25f3d7594ceca79cc726b3"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    window.auth = auth; // future use
+
+    const emailInput   = document.getElementById("email");
+    const passInput    = document.getElementById("password");
+    const signupBtn    = document.getElementById("signupBtn");
+    const loginBtn     = document.getElementById("loginBtn");
+    const logoutBtn    = document.getElementById("logoutBtn");
+    const statusBox    = document.getElementById("status");
+    const userBox      = document.getElementById("userBox");
+    const userEmailDom = document.getElementById("userEmail");
+
+    function setStatus(msg, type = "") {
+      statusBox.textContent = msg;
+      statusBox.className = "status " + (type === "error" ? "error" : type === "ok" ? "ok" : "");
+    }
+
+    signupBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const pass  = passInput.value.trim();
+
+      if (!email || !pass) {
+        setStatus("Email और Password दोनों भरें।", "error");
+        return;
+      }
+      if (pass.length < 6) {
+        setStatus("Password कम से कम 6 अक्षर का होना चाहिए।", "error");
+        return;
+      }
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, pass);
+        setStatus("Signup सफल ✅ आप लॉगिन हो गए हैं।", "ok");
+        // Optional: login के बाद होम पेज पर भेजना हो तो अगली लाइन uncomment करो:
+        // window.location.href = "index.html";
+      } catch (err) {
+        setStatus("Signup error: " + err.message, "error");
+      }
+    });
+
+    loginBtn.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const pass  = passInput.value.trim();
+
+      if (!email || !pass) {
+        setStatus("Email और Password दोनों भरें।", "error");
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        setStatus("Login सफल ✅", "ok");
+// 1 सेकंड के बाद होम पेज (Test Series वाला) पर ले जाओ
+setTimeout(() => {
+  window.location.href = "index.html#tests";
+}, 1000);
+        // Optional redirect:
+        // window.location.href = "index.html";
+      } catch (err) {
+        setStatus("Login error: " + err.message, "error");
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        setStatus("Logout हो गया।", "ok");
+      } catch (err) {
+        setStatus("Logout error: " + err.message, "error");
+      }
+    });
+
+    // User state change – UI update
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userBox.classList.remove("hidden");
+        userEmailDom.textContent = user.email;
+      } else {
+        userBox.classList.add("hidden");
+        userEmailDom.textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>
