@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL Tier-I Demo Test | SelectBook</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: #e5eef9;
+      color: #222;
+    }
+
+    /* Top header bar */
+    .sb-header {
+      background: #1976d2;
+      color: #fff;
+      padding: 8px 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .sb-header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .sb-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sb-logo {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .sb-test-title {
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .sb-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .timer-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #0d47a1;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1180px;
+      margin: 16px auto 32px;
+      padding: 0 16px;
+    }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.5fr) 240px;
+      gap: 10px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+      border: 1px solid #c5d2e6;
+    }
+
+    .left-panel {
+      padding: 10px 12px 12px;
+    }
+
+    .right-panel {
+      padding: 8px 10px 10px;
+      font-size: 12px;
+    }
+
+    /* Question area */
+    .section-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .section-label {
+      font-weight: 600;
+      color: #0d47a1;
+    }
+
+    .question-box {
+      border: 1px solid #c5d2e6;
+      border-radius: 3px;
+      padding: 10px;
+      min-height: 260px;
+      background: #fafbff;
+    }
+
+    .question-number {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .question-text {
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .question-text small {
+      display: block;
+      margin-top: 4px;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .options-list {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .options-list li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .options-list input[type="radio"] {
+      margin-top: 2px;
+    }
+
+    /* Bottom buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 3px;
+      font-size: 12px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #1976d2;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      background: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #90caf9;
+      font-weight: 500;
+    }
+
+    .btn-danger {
+      background: #ffcdd2;
+      color: #b71c1c;
+      border: 1px solid #ef9a9a;
+      font-weight: 500;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: #37474f;
+      border: 1px solid #b0bec5;
+    }
+
+    .btn-submit {
+      background: #43a047;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    /* Right panel */
+    .legend {
+      border-bottom: 1px solid #c5d2e6;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .legend-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .legend-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid #90a4ae;
+      font-size: 11px;
+      display: inline-block;
+    }
+
+    .status-not-visited {
+      background: #ffffff;
+    }
+    .status-not-answered {
+      background: #e53935;
+    }
+    .status-answered {
+      background: #43a047;
+    }
+    .status-review {
+      background: #8e24aa;
+    }
+
+    .section-info {
+      font-size: 11px;
+      margin-bottom: 6px;
+      color: #455a64;
+    }
+
+    .palette-title {
+      font-weight: 600;
+      margin: 4px 0;
+      font-size: 12px;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .q-pal-btn {
+      height: 26px;
+      border-radius: 3px;
+      border: 1px solid #90a4ae;
+      font-size: 12px;
+      cursor: pointer;
+      background: #ffffff;
+    }
+
+    .q-pal-btn.active {
+      outline: 2px solid #1565c0;
+      outline-offset: 0;
+    }
+
+    .palette-footer {
+      border-top: 1px solid #c5d2e6;
+      padding-top: 6px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .palette-footer button {
+      width: 100%;
+    }
+
+    .lang-select {
+      font-size: 12px;
+      padding: 3px 6px;
+    }
+
+    /* Result section */
+    .result-card {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #c5d2e6;
+      background: #f5f7ff;
+      display: none;
+    }
+
+    .result-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .result-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .result-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #c5d2e6;
+    }
+
+    @media (max-width: 800px) {
+      .test-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="sb-header">
+    <div class="sb-header-inner">
+      <div class="sb-header-left">
+        <div class="sb-logo">SelectBook</div>
+        <div class="sb-test-title">SSC CGL Tier-I Demo Test</div>
+      </div>
+      <div class="sb-header-right">
+        <div>
+          Choose Language:
+          <select id="language-select" class="lang-select">
+            <option value="hi" selected>Hindi</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <div class="timer-pill">Time Left: <span id="timer">10:00</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <div class="test-layout">
+      <!-- LEFT: question area -->
+      <section class="panel left-panel">
+        <div class="section-bar">
+          <div class="section-label">Section: SSC CGL Tier-I Demo</div>
+          <div id="q-info" style="font-size:12px;">Question 1 of 5</div>
+        </div>
+
+        <div class="question-box">
+          <div class="question-number" id="q-number">Question No. 1</div>
+          <div class="question-text" id="q-text">
+            <!-- question text here -->
+          </div>
+          <ul class="options-list" id="options-list">
+            <!-- options here -->
+          </ul>
+        </div>
+
+        <div class="nav-buttons">
+          <div class="nav-left">
+            <button id="prev-btn" class="btn-outline">Previous</button>
+            <button id="clear-btn" class="btn-danger">Clear Response</button>
+          </div>
+          <div class="nav-right">
+            <button id="mark-review-btn" class="btn-secondary">
+              Mark for Review & Next
+            </button>
+            <button id="save-next-btn" class="btn-primary">Save & Next</button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="result-card" id="result-card">
+          <div class="result-title">Test Summary (Demo)</div>
+          <div class="result-stats" id="result-stats"></div>
+          <div style="font-size:12px;color:#455a64;">
+            Detailed per-question analysis बाद में बनाएँगे। अभी के लिए यह सिर्फ demo
+            summary है।
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: palette + legend -->
+      <aside class="panel right-panel">
+        <div class="legend">
+          <div class="legend-title">Legend</div>
+          <div class="legend-item">
+            <span class="legend-dot status-answered"></span>
+            <span>Answered</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot status-not-answered"></span>
+            <span>Not Answered</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot status-review"></span>
+            <span>Marked for Review</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot status-not-visited"></span>
+            <span>Not Visited</span>
+          </div>
+        </div>
+
+        <div class="section-info" id="section-info">
+          You are viewing SSC CGL Tier-I Demo section.
+        </div>
+
+        <div class="palette-title">Question Palette</div>
+        <div class="palette-grid" id="palette-grid">
+          <!-- buttons 1..N here -->
+        </div>
+
+        <div class="palette-footer">
+          <button id="submit-btn" class="btn-submit">Submit Test</button>
+          <button id="back-home-btn" class="btn-outline" onclick="goHome()">
+            Back to Home
+          </button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    // -------- CONFIG --------
+    const TOTAL_TIME_SECONDS = 10 * 60; // 10 minutes demo
+
+    // Questions (demo) – यहाँ अपना data रख सकते हैं
+    const questions = [
+      {
+        id: 1,
+        text_hi: "भारत का संविधान कब लागू हुआ?",
+        text_en: "When did the Constitution of India come into effect?",
+        options_hi: [
+          "26 जनवरी 1947",
+          "15 अगस्त 1947",
+          "26 जनवरी 1950",
+          "26 नवम्बर 1949"
+        ],
+        options_en: [
+          "26 January 1947",
+          "15 August 1947",
+          "26 January 1950",
+          "26 November 1949"
+        ],
+        correctIndex: 2
+      },
+      {
+        id: 2,
+        text_hi: "भारतीय संसद के कितने सदन होते हैं?",
+        text_en: "How many houses does the Indian Parliament have?",
+        options_hi: ["एक", "दो", "तीन", "चार"],
+        options_en: ["One", "Two", "Three", "Four"],
+        correctIndex: 1
+      },
+      {
+        id: 3,
+        text_hi: "लोकसभा का कार्यकाल कितने वर्ष का होता है?",
+        text_en: "What is the normal term of the Lok Sabha?",
+        options_hi: ["3 वर्ष", "4 वर्ष", "5 वर्ष", "6 वर्ष"],
+        options_en: ["3 years", "4 years", "5 years", "6 years"],
+        correctIndex: 2
+      },
+      {
+        id: 4,
+        text_hi: "भारत का राष्ट्रीय पशु कौन है?",
+        text_en: "What is the national animal of India?",
+        options_hi: ["हाथी", "शेर", "बाघ", "गैंडा"],
+        options_en: ["Elephant", "Lion", "Tiger", "Rhinoceros"],
+        correctIndex: 2
+      },
+      {
+        id: 5,
+        text_hi: "भारतीय संविधान की प्रस्तावना में भारत को किस रूप में वर्णित किया गया है?",
+        text_en:
+          "In the Preamble of the Constitution, India is described as a ___?",
+        options_hi: [
+          "साम्यवादी, धर्मनिरपेक्ष, लोकतांत्रिक गणराज्य",
+          "राजतंत्र",
+          "धर्मतंत्र",
+          "संघीय साम्राज्य"
+        ],
+        options_en: [
+          "Sovereign, Socialist, Secular, Democratic Republic",
+          "Monarchy",
+          "Theocracy",
+          "Federal Empire"
+        ],
+        correctIndex: 0
+      }
+    ];
+
+    // -------- STATE --------
+    const state = {
+      currentIndex: 0,
+      language: "hi",
+      answers: [], // answerIndex या null
+      visited: [],
+      markedForReview: [],
+      timerSecondsLeft: TOTAL_TIME_SECONDS,
+      testSubmitted: false
+    };
+
+    for (let i = 0; i < questions.length; i++) {
+      state.answers[i] = null;
+      state.visited[i] = false;
+      state.markedForReview[i] = false;
+    }
+
+    // -------- DOM refs --------
+    const qNumberEl = document.getElementById("q-number");
+    const qTextEl = document.getElementById("q-text");
+    const optionsListEl = document.getElementById("options-list");
+    const qInfoEl = document.getElementById("q-info");
+    const paletteGridEl = document.getElementById("palette-grid");
+    const timerEl = document.getElementById("timer");
+    const resultCardEl = document.getElementById("result-card");
+    const resultStatsEl = document.getElementById("result-stats");
+
+    const prevBtn = document.getElementById("prev-btn");
+    const clearBtn = document.getElementById("clear-btn");
+    const markReviewBtn = document.getElementById("mark-review-btn");
+    const saveNextBtn = document.getElementById("save-next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+    const langSelect = document.getElementById("language-select");
+
+    // -------- INIT --------
+    function init() {
+      buildPalette();
+      renderQuestion();
+      updateButtons();
+      startTimer();
+    }
+
+    // Palette buttons
+    function buildPalette() {
+      paletteGridEl.innerHTML = "";
+      questions.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.textContent = idx + 1;
+        btn.className = "q-pal-btn";
+        btn.addEventListener("click", () => {
+          saveCurrentSelection(); // current question state
+          state.currentIndex = idx;
+          renderQuestion();
+          updateButtons();
+        });
+        paletteGridEl.appendChild(btn);
+      });
+      updatePalette();
+    }
+
+    function getStatus(index) {
+      if (!state.visited[index]) return "not-visited";
+      if (state.markedForReview[index]) return "review";
+      if (state.answers[index] === null) return "not-answered";
+      return "answered";
+    }
+
+    function updatePalette() {
+      const buttons = paletteGridEl.querySelectorAll(".q-pal-btn");
+      buttons.forEach((btn, idx) => {
+        btn.classList.remove(
+          "status-not-visited",
+          "status-not-answered",
+          "status-answered",
+          "status-review",
+          "active"
+        );
+        const status = getStatus(idx);
+        if (status === "not-visited") btn.classList.add("status-not-visited");
+        if (status === "not-answered") btn.classList.add("status-not-answered");
+        if (status === "answered") btn.classList.add("status-answered");
+        if (status === "review") btn.classList.add("status-review");
+
+        if (idx === state.currentIndex) btn.classList.add("active");
+      });
+    }
+
+    // Render question & options
+    function renderQuestion() {
+      const i = state.currentIndex;
+      const q = questions[i];
+      state.visited[i] = true;
+
+      qNumberEl.textContent = "Question No. " + (i + 1);
+      qInfoEl.textContent =
+        "Question " + (i + 1) + " of " + questions.length + "";
+
+      let text = state.language === "hi" ? q.text_hi : q.text_en;
+      let extra =
+        state.language === "hi"
+          ? q.text_en
+          : q.text_hi; /* दूसरी भाषा small में */
+
+      qTextEl.innerHTML =
+        text + '<small style="margin-top:4px;">' + extra + "</small>";
+
+      const opts = state.language === "hi" ? q.options_hi : q.options_en;
+      optionsListEl.innerHTML = "";
+      opts.forEach((opt, idx) => {
+        const li = document.createElement("li");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "option";
+        input.value = idx;
+
+        if (state.answers[i] === idx) {
+          input.checked = true;
+        }
+
+        input.addEventListener("change", () => {
+          state.answers[i] = idx;
+          updatePalette();
+        });
+
+        const label = document.createElement("label");
+        label.textContent = opt;
+
+        li.appendChild(input);
+        li.appendChild(label);
+        optionsListEl.appendChild(li);
+      });
+
+      updatePalette();
+    }
+
+    // Save selection before moving away
+    function saveCurrentSelection() {
+      const i = state.currentIndex;
+      state.visited[i] = true;
+      // answers already updated on change
+      updatePalette();
+    }
+
+    // Buttons behaviour
+    prevBtn.addEventListener("click", () => {
+      if (state.currentIndex > 0) {
+        saveCurrentSelection();
+        state.currentIndex--;
+        renderQuestion();
+        updateButtons();
+      }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      const i = state.currentIndex;
+      state.answers[i] = null;
+      state.markedForReview[i] = false;
+      renderQuestion();
+      updateButtons();
+    });
+
+    saveNextBtn.addEventListener("click", () => {
+      const i = state.currentIndex;
+      state.markedForReview[i] = false; // normal save
+      saveCurrentSelection();
+      if (state.currentIndex < questions.length - 1) {
+        state.currentIndex++;
+        renderQuestion();
+      }
+      updateButtons();
+    });
+
+    markReviewBtn.addEventListener("click", () => {
+      const i = state.currentIndex;
+      state.markedForReview[i] = true;
+      saveCurrentSelection();
+      if (state.currentIndex < questions.length - 1) {
+        state.currentIndex++;
+        renderQuestion();
+      }
+      updateButtons();
+    });
+
+    submitBtn.addEventListener("click", () => {
+      if (state.testSubmitted) return;
+
+      const confirmSubmit = confirm(
+        "क्या आप वाकई यह Demo Test Submit करना चाहते हैं?"
+      );
+      if (!confirmSubmit) return;
+
+      state.testSubmitted = true;
+      clearInterval(timerInterval);
+      calculateResult();
+    });
+
+    function updateButtons() {
+      prevBtn.disabled = state.currentIndex === 0;
+      saveNextBtn.disabled = state.currentIndex === questions.length - 1;
+      markReviewBtn.disabled = state.currentIndex === questions.length - 1;
+    }
+
+    // Language change
+    langSelect.addEventListener("change", (e) => {
+      state.language = e.target.value;
+      renderQuestion();
+    });
+
+    // Timer
+    let timerInterval = null;
+    function startTimer() {
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        if (state.timerSecondsLeft <= 0) {
+          clearInterval(timerInterval);
+          if (!state.testSubmitted) {
+            alert("Time over! Test auto-submit हो गया है।");
+            state.testSubmitted = true;
+            calculateResult();
+          }
+          return;
+        }
+        state.timerSecondsLeft--;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(state.timerSecondsLeft / 60);
+      const s = state.timerSecondsLeft % 60;
+      timerEl.textContent =
+        String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    // Result calculation
+    function calculateResult() {
+      let attempted = 0;
+      let correct = 0;
+      let wrong = 0;
+
+      questions.forEach((q, idx) => {
+        const ans = state.answers[idx];
+        if (ans !== null) {
+          attempted++;
+          if (ans === q.correctIndex) correct++;
+          else wrong++;
+        }
+      });
+
+      const total = questions.length;
+      const score = correct; // demo: +1 for correct, 0 negative
+
+      resultStatsEl.innerHTML = "";
+      const stats = [
+        ["Total Questions", total],
+        ["Attempted", attempted],
+        ["Not Attempted", total - attempted],
+        ["Correct", correct],
+        ["Wrong", wrong],
+        ["Score", score + " / " + total]
+      ];
+
+      stats.forEach(([label, value]) => {
+        const span = document.createElement("div");
+        span.className = "result-tag";
+        span.textContent = label + ": " + value;
+        resultStatsEl.appendChild(span);
+      });
+
+      resultCardEl.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goHome() {
+      // instructions पेज पर वापस
+      window.location.href = "cgl-tier1-instructions.html";
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>
