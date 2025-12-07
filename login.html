@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Login / Signup - SelectBook</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f6fb;
+    }
+
+    /* ऊपर नीला बार */
+    .top-bar {
+      background: #0d47a1;
+      color: #fff;
+      padding: 12px 16px;
+      font-weight: 600;
+    }
+
+    .top-bar span {
+      font-size: 16px;
+    }
+
+    /* सेंटर कार्ड */
+    .login-wrapper {
+      min-height: calc(100vh - 48px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .login-card {
+      background: #fff;
+      max-width: 420px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      padding: 20px 22px 24px;
+    }
+
+    .login-card h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+
+    .login-card p.sub {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd2e0;
+      font-size: 14px;
+      margin-bottom: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #0d47a1;
+      box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.15);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-weight: 600;
+    }
+
+    #signup-btn {
+      flex: 1;
+      background: #ffffff;
+      color: #0d47a1;
+      border: 1px solid #0d47a1;
+    }
+
+    #login-btn {
+      flex: 1;
+      background: #0d47a1;
+      color: #ffffff;
+    }
+
+    #signup-btn:hover {
+      background: #e3f2fd;
+    }
+
+    #login-btn:hover {
+      background: #08316f;
+    }
+
+    #logout-btn {
+      width: 100%;
+      margin-top: 8px;
+      background: #ff7043;
+      color: #fff;
+    }
+
+    #logout-btn:hover {
+      background: #f4511e;
+    }
+
+    #login-message {
+      font-size: 13px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <span>SelectBook – Student Login</span>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h1>Student Login / Signup</h1>
+      <p class="sub">Email और Password से Account बनाएं या Login करें।</p>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="student@example.com" />
+
+      <label for="password">Password (कम से कम 6 अक्षर)</label>
+      <input type="password" id="password" placeholder="******" />
+
+      <div class="btn-row">
+        <button id="signup-btn" type="button">New User / Signup</button>
+        <button id="login-btn" type="button">Login</button>
+      </div>
+
+      <p id="login-message"></p>
+
+      <button id="logout-btn" type="button">Logout</button>
+    </div>
+  </div>
+
+  <!-- Firebase + Login Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+  // 🔹 तुम्हारा वही Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBVNl7TyK2QKo-jrwnodZQ6RN8Ib4zqT6M",
+    authDomain: "selectbook-test.firebaseapp.com",
+    projectId: "selectbook-test",
+    storageBucket: "selectbook-test.firebasestorage.app",
+    messagingSenderId: "325583536202",
+    appId: "1:325583536202:web:25f3d7594ceca79cc726b3"
+  };
+
+  // 🔹 Firebase initialize
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // 🔹 Form के input फील्ड
+  const emailInput = document.querySelector('input[type="email"]');
+  const passwordInput = document.querySelector('input[type="password"]');
+
+  // 🔹 Buttons (id से पकड़ रहे हैं)
+  const signupBtn = document.getElementById("signup-btn");
+  const loginBtn  = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  // 🔹 Message दिखाने वाला element (जो 160 नंबर पर है)
+  const messageBox = document.getElementById("login-message");
+
+  function showMessage(text, ok = true) {
+    if (!messageBox) return;
+    messageBox.textContent = text;
+    messageBox.style.color = ok ? "#0a7d1b" : "#c62828"; // हरा / लाल
+  }
+
+  // ✅ New User / Signup
+  if (signupBtn) {
+    signupBtn.addEventListener("click", async () => {
+      const email = emailInput?.value.trim();
+      const password = passwordInput?.value.trim();
+
+      if (!email || !password) {
+        showMessage("Email और Password दोनों भरें ❗", false);
+        return;
+      }
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showMessage("Signup सफल ✅ अब Login बटन दबाएं", true);
+      } catch (error) {
+        showMessage(error.message || "Signup में समस्या आई", false);
+      }
+    });
+  }
+
+  // ✅ Login
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async () => {
+      const email = emailInput?.value.trim();
+      const password = passwordInput?.value.trim();
+
+      if (!email || !password) {
+        showMessage("Email और Password दोनों भरें ❗", false);
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessage("Login सफल ✅, टेस्ट पेज खुल रहा है…", true);
+
+        // 🔹 Redirect
+        setTimeout(() => {
+          if (window.location.hostname.includes("github.io")) {
+            // GitHub Pages वाला path
+            window.location.href = "/selectbook/index.html#tests";
+          } else {
+            // Localhost / mobile preview
+            window.location.href = "index.html#tests";
+          }
+        }, 800);
+      } catch (error) {
+        showMessage("Login असफल ❌ Email या Password चेक करें", false);
+      }
+    });
+  }
+
+  // ✅ Logout (अगर यूज़ करना हो)
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      showMessage("Logout हो गया ✅", true);
+    });
+  }
+</script>
+</body>
+</html>
