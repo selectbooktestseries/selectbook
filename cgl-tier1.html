@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSC CGL Tier-I Demo Test - SelectBook</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #222;
+        }
+
+        .navbar {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar .logo {
+            font-size: 18px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 16px auto 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 16px 16px 24px;
+        }
+
+        .test-header h1 {
+            font-size: 20px;
+            margin: 0 0 6px;
+            color: #0d47a1;
+        }
+
+        .test-header p {
+            margin: 2px 0;
+            font-size: 13px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .badge {
+            background: #e3f2fd;
+            color: #0d47a1;
+            padding: 3px 8px;
+            border-radius: 30px;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: #c62828;
+        }
+
+        .question-box {
+            margin-top: 18px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 14px;
+        }
+
+        .q-number {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .q-text {
+            margin-bottom: 10px;
+        }
+
+        .option {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .option input {
+            margin-right: 6px;
+        }
+
+        .nav-buttons {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #424242;
+        }
+
+        .btn-primary {
+            background: #0d47a1;
+            color: #fff;
+        }
+
+        .btn-submit {
+            background: #ffb300;
+            color: #222;
+        }
+
+        .status-bar {
+            margin-top: 14px;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-box {
+            margin-top: 16px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* 🔵 AI Explanation box */
+        .ai-box {
+            margin-top: 14px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #e3f2fd;
+            font-size: 13px;
+            color: #0d47a1;
+            display: none;
+        }
+
+        .ai-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .ai-trigger {
+            margin-top: 10px;
+            background: #ffd84d;
+            color: #0d47a1;
+            border-radius: 18px;
+            padding: 6px 14px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 10px;
+                padding: 12px 12px 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <div class="logo">SelectBook</div>
+        <a href="index.html">⬅ Back to Home</a>
+    </div>
+
+    <!-- Test Container -->
+    <div class="container">
+        <div class="test-header">
+            <h1>SSC CGL Tier-I Demo Test</h1>
+            <p>कुल प्रश्न: 5 | कुल समय: <b>10 मिनट (Demo)</b></p>
+            <div class="info-row">
+                <span class="badge">+2 अंक सही पर</span>
+                <span class="badge">-0.5 अंक गलत पर</span>
+                <span class="badge timer" id="timer">Time: 10:00</span>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="q-number" id="q-number">Question 1 / 5</div>
+            <div class="q-text" id="q-text">Loading...</div>
+
+            <div class="options">
+                <!-- Options will be injected here -->
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn">Previous</button>
+                <button class="btn btn-primary" id="next-btn">Next</button>
+                <button class="btn btn-submit" id="submit-btn">Submit Test</button>
+            </div>
+
+            <div class="status-bar">
+                <span id="attempt-status">Attempted: 0 / 5</span>
+                <span id="current-status">Current Question: 1</span>
+            </div>
+
+            <!-- ✅ AI Explanation UI -->
+            <button class="ai-trigger" id="ai-btn">AI से Explanation लो</button>
+            <div class="ai-box" id="ai-box">
+                <div class="ai-title">AI Explanation (Demo)</div>
+                <div id="ai-text">यहाँ पर explanation दिखाई देगी।</div>
+            </div>
+
+            <div class="result-box" id="result-box"></div>
+        </div>
+    </div>
+
+    <script>
+        // 🔹 Demo questions + explanation (अभी manually, बाद में असली AI से आएगा)
+        const questions = [
+            {
+                q: "1. भारत का संविधान कब लागू हुआ?",
+                options: [
+                    "26 जनवरी 1947",
+                    "15 अगस्त 1947",
+                    "26 जनवरी 1950",
+                    "26 नवंबर 1949"
+                ],
+                ans: 2, // सही option index (0-based)
+                explanation: "संविधान सभा ने संविधान को 26 नवंबर 1949 को स्वीकार किया, लेकिन इसे लागू 26 जनवरी 1950 को किया गया। इसलिए सही उत्तर 26 जनवरी 1950 है।"
+            },
+            {
+                q: "2. 'पंचशील सिद्धांत' किससे संबंधित हैं?",
+                options: [
+                    "मौद्रिक नीति",
+                    "विदेश नीति",
+                    "कृषि नीति",
+                    "शिक्षा नीति"
+                ],
+                ans: 1,
+                explanation: "पंचशील सिद्धांत भारत और चीन के बीच शांति और सह-अस्तित्व के सिद्धांत हैं, जो विदेश नीति से जुड़े हैं।"
+            },
+            {
+                q: "3. किसी संख्या में 25% की वृद्धि के बाद वह 200 हो जाती है, मूल संख्या क्या थी?",
+                options: [
+                    "120",
+                    "150",
+                    "160",
+                    "180"
+                ],
+                ans: 2,
+                explanation: "मान लो मूल संख्या x है। 25% बढ़ने पर संख्या = 1.25x = 200 ⇒ x = 200 / 1.25 = 160।"
+            },
+            {
+                q: "4. निम्न में से किस गैस को 'ग्रीनहाउस गैस' नहीं माना जाता?",
+                options: [
+                    "कार्बन डाइऑक्साइड",
+                    "मीथेन",
+                    "नाइट्रस ऑक्साइड",
+                    "ऑक्सीजन"
+                ],
+                ans: 3,
+                explanation: "ऑक्सीजन ग्रीनहाउस गैस नहीं है, जबकि CO₂, मीथेन और N₂O प्रमुख ग्रीनहाउस गैसें हैं।"
+            },
+            {
+                q: "5. 'नंदी हिल्स' किस राज्य में स्थित है?",
+                options: [
+                    "केरल",
+                    "कर्नाटक",
+                    "तमिलनाडु",
+                    "आंध्र प्रदेश"
+                ],
+                ans: 1,
+                explanation: "नंदी हिल्स कर्नाटक राज्य में, बेंगलुरु के पास एक प्रसिद्ध हिल स्टेशन है।"
+            }
+        ];
+
+        const totalQuestions = questions.length;
+        let currentIndex = 0;
+        let answers = new Array(totalQuestions).fill(null);
+        let timerSeconds = 10 * 60; // 10 मिनट
+
+        const qNumberEl = document.getElementById("q-number");
+        const qTextEl = document.getElementById("q-text");
+        const optionsContainer = document.querySelector(".options");
+        const attemptStatusEl = document.getElementById("attempt-status");
+        const currentStatusEl = document.getElementById("current-status");
+        const resultBoxEl = document.getElementById("result-box");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const submitBtn = document.getElementById("submit-btn");
+        const timerEl = document.getElementById("timer");
+
+        // 🔵 AI elements
+        const aiBtn = document.getElementById("ai-btn");
+        const aiBox = document.getElementById("ai-box");
+        const aiText = document.getElementById("ai-text");
+
+        function loadQuestion(index) {
+            const q = questions[index];
+            qNumberEl.textContent = `Question ${index + 1} / ${totalQuestions}`;
+            qTextEl.textContent = q.q;
+
+            optionsContainer.innerHTML = "";
+            q.options.forEach((opt, i) => {
+                const optDiv = document.createElement("div");
+                optDiv.className = "option";
+
+                const id = `opt-${index}-${i}`;
+
+                optDiv.innerHTML = `
+                    <label>
+                        <input type="radio" name="option" value="${i}" id="${id}">
+                        ${opt}
+                    </label>
+                `;
+
+                optionsContainer.appendChild(optDiv);
+            });
+
+            // पहले चुना हुआ answer restore
+            if (answers[index] !== null) {
+                const selectedId = `opt-${index}-${answers[index]}`;
+                const selectedInput = document.getElementById(selectedId);
+                if (selectedInput) {
+                    selectedInput.checked = true;
+                }
+            }
+
+            // हर question change पर AI box hide कर दो
+            aiBox.style.display = "none";
+            aiText.textContent = "";
+
+            updateStatus();
+        }
+
+        function getSelectedOption() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (!selected) return null;
+            return parseInt(selected.value, 10);
+        }
+
+        function updateStatus() {
+            const attempted = answers.filter(v => v !== null).length;
+            attemptStatusEl.textContent = `Attempted: ${attempted} / ${totalQuestions}`;
+            currentStatusEl.textContent = `Current Question: ${currentIndex + 1}`;
+
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalQuestions - 1;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            const sel = getSelectedOption();
+            if (sel !== null) {
+                answers[currentIndex] = sel;
+            }
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadQuestion(currentIndex);
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            const sel = getSelectedOption();
+            if (sel !== null) {
+                answers[currentIndex] = sel;
+            }
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                loadQuestion(currentIndex);
+            }
+        });
+
+        submitBtn.addEventListener("click", () => {
+            const sel = getSelectedOption();
+            if (sel !== null) {
+                answers[currentIndex] = sel;
+            }
+
+            if (!confirm("क्या आप वाकई टेस्ट सबमिट करना चाहते हैं?")) return;
+
+            finishTest();
+        });
+
+        function finishTest() {
+            clearInterval(timerInterval);
+
+            let score = 0;
+            let correct = 0;
+            let wrong = 0;
+            const marksPerQ = 2;
+            const negative = 0.5;
+
+            answers.forEach((ans, i) => {
+                if (ans === null) return;
+                if (ans === questions[i].ans) {
+                    score += marksPerQ;
+                    correct++;
+                } else {
+                    score -= negative;
+                    wrong++;
+                }
+            });
+
+            resultBoxEl.style.display = "block";
+            resultBoxEl.innerHTML = `
+                टेस्ट पूरा!<br>
+                सही प्रश्न: <b>${correct}</b> | गलत: <b>${wrong}</b> | 
+                कुल स्कोर: <b>${score.toFixed(2)} / ${(totalQuestions * marksPerQ).toFixed(0)}</b>
+                <br><br>
+                यह सिर्फ Demo Test है। असली Full Mock Test में पूरा CGL pattern रहेगा।
+            `;
+
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            submitBtn.disabled = true;
+            optionsContainer.querySelectorAll("input").forEach(inp => inp.disabled = true);
+        }
+
+        // Timer
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+        }
+
+        const timerInterval = setInterval(() => {
+            timerEl.textContent = `Time: ${formatTime(timerSeconds)}`;
+            timerSeconds--;
+
+            if (timerSeconds < 0) {
+                clearInterval(timerInterval);
+                alert("समय समाप्त! टेस्ट ऑटोमेटिक सबमिट हो गया है।");
+                finishTest();
+            }
+        }, 1000);
+
+        // 🔵 AI Button logic (अभी local explanation से)
+        aiBtn.addEventListener("click", () => {
+            const q = questions[currentIndex];
+
+            // अभी explanation local object से आ रही है
+            // बाद में यहीं से backend AI API call करेंगे
+            if (q.explanation) {
+                aiText.textContent = q.explanation;
+                aiBox.style.display = "block";
+            } else {
+                aiText.textContent = "इस प्रश्न के लिए explanation अभी उपलब्ध नहीं है।";
+                aiBox.style.display = "block";
+            }
+        });
+
+        // पहली बार question load करो
+        loadQuestion(currentIndex);
+    </script>
+</body>
+</html>
