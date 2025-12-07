@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SelectBook – Online Test Series Platform</title>
+
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:Arial;background:#f4f6fb;color:#222;}
+a{text-decoration:none;}
+
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#0d47a1;color:#fff;position:sticky;top:0;z-index:10;}
+.navbar .logo{font-weight:bold;font-size:20px;}
+.navbar .nav-links a{margin-left:15px;font-size:14px;color:#e3f2fd;}
+
+.hero{padding:30px 20px;background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.hero-text{flex:1;min-width:240px;}
+.hero-text h1{margin:0 0 10px;font-size:26px;}
+.hero-text p{margin:0 0 18px;font-size:15px;}
+.btn-primary{background:#ffca28;border:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:bold;cursor:pointer;}
+
+.hero-founders{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center;min-width:260px;}
+.founder-card{background:rgba(3,22,56,0.3);padding:10px 12px 12px;border-radius:12px;text-align:center;min-width:120px;box-shadow:0 2px 6px rgba(0,0,0,0.25);}
+.founder-card img{width:130px;height:160px;border-radius:12px;object-fit:cover;border:3px solid #ffca28;margin-bottom:8px;background:#fff;}
+.founder-name{margin:0;font-size:14px;font-weight:bold;letter-spacing:0.5px;}
+.founder-role{margin:2px 0 0;font-size:12px;color:#ffecb3;}
+
+.container{max-width:1100px;margin:0 auto;padding:20px;}
+.section-title{font-size:20px;margin-bottom:10px;}
+
+.news-ticker-wrapper{background:#0d47a1;color:#fff;overflow:hidden;padding:8px 0;}
+.news-ticker{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:0 20px;}
+.news-label{background:#ffca28;color:#000;font-size:12px;font-weight:bold;padding:4px 8px;border-radius:4px;}
+.news-track{position:relative;overflow:hidden;flex:1;height:24px;}
+.news-inner{position:absolute;white-space:nowrap;display:inline-block;animation:ticker 18s linear infinite;}
+.news-item{display:inline-block;margin-right:60px;font-size:13px;}
+@keyframes ticker{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+
+
+.features{display:flex;flex-wrap:wrap;gap:15px;}
+.feature-card{flex:1;min-width:220px;background:#e3f2fd;padding:15px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
+.feature-card h3{margin:0 0 8px;font-size:16px;}
+.feature-card p{margin:0;font-size:14px;}
+
+.test-tabs{margin-top:20px;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;}
+.tab-btn{border:1px solid #0d47a1;padding:8px 16px;border-radius:20px;background:#ffffff;color:#0d47a1;font-size:14px;cursor:pointer;}
+.tab-btn.active{background:#0d47a1;color:#fff;}
+
+.category-section{margin-bottom:25px;}
+.category-title{font-size:18px;margin-bottom:8px;color:#0d47a1;border-left:4px solid #0d47a1;padding-left:8px;}
+.category-subtitle{font-size:13px;color:#555;margin-bottom:10px;}
+.tests-grid{display:flex;flex-direction:column;gap:12px;}
+
+.test-card{background:#ffffff;padding:15px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.06);border-left:4px solid #0d47a1;}
+.test-card h3{margin:0 0 4px;font-size:16px;}
+.test-meta{font-size:13px;color:#555;margin-bottom:6px;}
+.test-desc{font-size:13px;margin-bottom:8px;}
+.test-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+.btn-outline{padding:8px 14px;border-radius:6px;border:1px solid #0d47a1;background:#fff;color:#0d47a1;font-size:13px;cursor:pointer;}
+
+footer{text-align:center;padding:15px;background:#e0e0e0;font-size:13px;margin-top:20px;}
+
+@media(max-width:700px){
+  .hero-text h1{font-size:22px;}
+  .hero-inner{flex-direction:column;align-items:flex-start;}
+  .hero-founders{justify-content:flex-start;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="logo">SelectBook</div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#tests">Test Series</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Online Test Series – SSC, Railway & Rajasthan Exams</h1>
+      <p>Category-wise Mock Tests • Clean Layout • Mobile Friendly UI</p>
+      <button class="btn-primary" onclick="document.getElementById('tests').scrollIntoView()">Browse Test Series</button>
+    </div>
+
+    <div class="hero-founders">
+      <div class="founder-card">
+        <img src="jagdish.jpg" alt="Jagdish Meena">
+        <p class="founder-name">JAGDISH MEENA</p>
+        <p class="founder-role">Founder</p>
+      </div>
+
+      <div class="founder-card">
+        <img src="mahendra.jpg" alt="Mahendra Meena">
+        <p class="founder-name">MAHENDRA MEENA</p>
+        <p class="founder-role">Manager</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="news-ticker-wrapper">
+  <div class="news-ticker">
+    <div class="news-label">NEWS</div>
+    <div class="news-track">
+      <div class="news-inner">
+        <div class="news-item">SSC CGL 2025 Notification Expected Soon.</div>
+        <div class="news-item">RRB Group D Preparation – Daily Mock Tests Live.</div>
+        <div class="news-item">Rajasthan GK Special Test Series Coming Soon.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <h2 class="section-title">Why Choose SelectBook Test Series?</h2>
+  <div class="features">
+    <div class="feature-card">
+      <h3>Category-wise Sections</h3>
+      <p>SSC, Railway & Rajasthan के लिए अलग-अलग sections.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Simple Layout</h3>
+      <p>Exam Name, Time & Language साफ-साफ लिखा हुआ।</p>
+    </div>
+    <div class="feature-card">
+      <h3>Future Ready</h3>
+      <p>यही Layout आगे चलकर App में भी convert किया जा सकता है।</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <section id="tests">
+    <h2 class="section-title">Browse Test Series by Category</h2>
+
+    <div class="test-tabs">
+      <button class="tab-btn active" data-target="ssc">SSC</button>
+      <button class="tab-btn" data-target="railway">Railway</button>
+      <button class="tab-btn" data-target="rajasthan">Rajasthan Exams</button>
+    </div>
+
+    <!-- SSC SECTION -->
+    <div class="category-section" data-category="ssc">
+      <div class="category-title">SSC Section</div>
+      <div class="category-subtitle">CGL, CHSL, MTS, Delhi Police, SSC GD आदि के लिए Mock Tests</div>
+
+      <div class="tests-grid">
+
+        <div class="test-card">
+          <h3>SSC CGL Tier-I Full Mock Test</h3>
+          <div class="test-meta">100 Questions • 60 Minutes • हिंदी + English</div>
+          <div class="test-desc">Complete CGL pattern based full-length mock test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>SSC CHSL Tier-I Practice Test</h3>
+          <div class="test-meta">100 Questions • 60 Minutes • हिंदी + English</div>
+          <div class="test-desc">LDC, DEO Posts के लिए SSC CHSL पैटर्न पर तैयार mock test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>SSC MTS Mock Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">Multi Tasking Staff Exam के लिए Basic + Moderate level questions.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>SSC Delhi Police Constable Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">Delhi Police Constable Exam के लिए GK, Reasoning, Computer & Current Affairs.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>SSC GD Constable Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">SSC GD Constable Exam के लिए Defence oriented Test Series.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RAILWAY SECTION -->
+    <div class="category-section" data-category="railway" style="display:none;">
+      <div class="category-title">Railway Section</div>
+      <div class="category-subtitle">ALP, Technician, NTPC (UG/PG), Group D, RPF के लिए Mock Tests</div>
+
+      <div class="tests-grid">
+
+        <div class="test-card">
+          <h3>RRB ALP (Assistant Loco Pilot) Test</h3>
+          <div class="test-meta">75 Questions • 60 Minutes • हिंदी + English</div>
+          <div class="test-desc">ALP Exam के लिए Technical + Non-Technical topics पर आधारित test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RRB Technician Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">Electrical, Mechanical और Electronics concepts पर आधारित Technician test series.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RRB NTPC (Under Graduate) Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">12th level posts (Clerk, Typist etc.) के लिए NTPC UG mock tests.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RRB NTPC (Graduate) Test</h3>
+          <div class="test-meta">120 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">Station Master, Goods Guard आदि posts के लिए NTPC PG mock test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RRB Group D Mock Test</h3>
+          <div class="test-meta">100 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">Group D Exam pattern पर Maths, Reasoning, GK और Science का mix.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RPF (Railway Protection Force) Test</h3>
+          <div class="test-meta">120 Questions • 90 Minutes • हिंदी + English</div>
+          <div class="test-desc">RPF Constable / SI Exam के लिए Reasoning, Arithmetic, GK & Current Affairs.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RAJASTHAN SECTION -->
+    <div class="category-section" data-category="rajasthan" style="display:none;">
+      <div class="category-title">Rajasthan Exams Section</div>
+      <div class="category-subtitle">Rajasthan Police, VDO, Patwari, REET, LDC, Jail Warder, RPSC SI के लिए Mock Tests</div>
+
+      <div class="tests-grid">
+
+        <div class="test-card">
+          <h3>Rajasthan Police Constable Test</h3>
+          <div class="test-meta">150 Questions • 120 Minutes • केवल हिंदी</div>
+          <div class="test-desc">Rajasthan Police Constable Exam के लिए Raj GK, India GK, Reasoning & Computer.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>Rajasthan VDO (Village Development Officer) Test</h3>
+          <div class="test-meta">100 Questions • 120 Minutes • केवल हिंदी</div>
+          <div class="test-desc">Panchayati Raj, Govt Schemes और Rajasthan specific topics पर आधारित test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>Rajasthan Patwari Test</h3>
+          <div class="test-meta">150 Questions • 180 Minutes • केवल हिंदी</div>
+          <div class="test-desc">Patwari Exam के लिए Land Records, Rajasthan GK और Maths reasoning mix.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>REET Level-1 / Level-2 Test</h3>
+          <div class="test-meta">150 Questions • 150 Minutes • केवल हिंदी</div>
+          <div class="test-desc">Child Development & Pedagogy, Language, Maths, EVS आधारित teachers eligibility test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>Rajasthan LDC (Lower Division Clerk) Test</h3>
+          <div class="test-meta">150 Questions • 180 Minutes • केवल हिंदी</div>
+          <div class="test-desc">LDC Exam के लिए Office work, Grammar, Computer & Rajasthan GK.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>Rajasthan Jail Warder Test</h3>
+          <div class="test-meta">100 Questions • 120 Minutes • केवल हिंदी</div>
+          <div class="test-desc">Jail Warder Exam के लिए GK, Rajasthan Special और Reasoning पर आधारित mock test.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <h3>RPSC Sub-Inspector (SI) Test</h3>
+          <div class="test-meta">200 Questions • 120 Minutes • केवल हिंदी</div>
+          <div class="test-desc">RPSC SI Exam के लिए Polity, History, Rajasthan GK, Reasoning व अन्य important topics.</div>
+          <div class="test-actions">
+            <button class="btn-primary">Free Demo</button>
+            <button class="btn-outline">Buy Full Series</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <hr>
+
+  <section id="about">
+    <h2 class="section-title">About SelectBook</h2>
+    <p>SelectBook का लक्ष्य है कि छात्रों को अलग-अलग प्रतियोगी परीक्षाओं के लिए Category-wise Structured Test Series मिल सके।</p>
+  </section>
+
+  <hr>
+
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p>WhatsApp: Chat</p>
+    <p>Email: selectbook@example.com</p>
+  </section>
+
+</div>
+
+<footer>
+  © 2025 SelectBook – Multi Exam Online Test Series Platform
+</footer>
+
+<script>
+const tabButtons = document.querySelectorAll('.tab-btn');
+const categories = document.querySelectorAll('.category-section');
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.getAttribute('data-target');
+
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    categories.forEach(sec => {
+      if (sec.getAttribute('data-category') === target) {
+        sec.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
