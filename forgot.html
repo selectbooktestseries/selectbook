@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot Password - SelectBook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { margin: 0 0 12px; text-align: center; }
+    .field { margin-bottom: 10px; }
+    label { font-size: 13px; display: block; margin-bottom: 4px; }
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 9px;
+      border-radius: 6px;
+      border: none;
+      background: #f97316;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .link {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .link a { color: #2563eb; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Reset Password</h2>
+
+    <form onsubmit="handleResetPassword(event)">
+      <div class="field">
+        <label for="resetEmail">Registered Email ID</label>
+        <input id="resetEmail" type="email" required>
+      </div>
+
+      <div class="field">
+        <label for="resetPassword">New Password</label>
+        <input id="resetPassword" type="password" required>
+      </div>
+
+      <div class="field">
+        <label for="resetConfirm">Confirm New Password</label>
+        <input id="resetConfirm" type="password" required>
+      </div>
+
+      <button type="submit">Update Password</button>
+    </form>
+
+    <div class="link">
+      <a href="login.html">Back to Login</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
