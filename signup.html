@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - SelectBook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { margin: 0 0 12px; text-align: center; }
+    .field { margin-bottom: 10px; }
+    label { font-size: 13px; display: block; margin-bottom: 4px; }
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 9px;
+      border-radius: 6px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .link {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .link a { color: #2563eb; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Create Account</h2>
+
+    <form onsubmit="handleSignup(event)">
+      <div class="field">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text" placeholder="अपना पूरा नाम" required>
+      </div>
+
+      <div class="field">
+        <label for="mobile">Mobile No.</label>
+        <input id="mobile" type="tel" placeholder="10 digit mobile" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email ID</label>
+        <input id="email" type="email" placeholder="example@mail.com" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" required>
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" required>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="link">
+      Already have an account?
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
