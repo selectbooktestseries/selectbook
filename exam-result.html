@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Result | SelectBook</title>
+
+<style>
+:root{
+    --primary:#013b8a;
+    --primary-light:#0a48a7;
+    --accent:#f4f7ff;
+    --border:#d0d7e2;
+    --danger:#e74c3c;
+    --success:#2ecc71;
+    --warning:#f1c40f;
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f6f8fb;
+    color:#222;
+}
+
+/* TOP BAR – SAME STYLE */
+.top-bar{
+    background:var(--primary);
+    color:#fff;
+    padding:10px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.top-left{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.top-right{
+    display:flex;
+    gap:10px;
+    font-size:14px;
+    align-items:center;
+}
+
+.tag-success{
+    background:#e3f7ea;
+    color:#1e7e34;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.btn-top{
+    padding:6px 12px;
+    border-radius:4px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-size:13px;
+}
+
+/* PAGE WRAPPER */
+.result-wrapper{
+    max-width:1100px;
+    margin:18px auto 30px;
+    padding:0 10px;
+}
+
+/* MAIN GRID */
+.result-grid{
+    display:grid;
+    grid-template-columns:2.2fr 1.5fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+/* CARDS */
+.card{
+    background:#fff;
+    border-radius:10px;
+    border:1px solid var(--border);
+    padding:16px 18px;
+}
+
+.card-title{
+    font-weight:bold;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+/* SUMMARY CARD */
+.summary-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.test-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.test-info{
+    font-size:13px;
+    color:#555;
+}
+
+.score-main{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:6px;
+}
+
+.score-circle{
+    width:92px;
+    height:92px;
+    border-radius:50%;
+    border:4px solid var(--primary);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+
+.score-circle span{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.score-details{
+    font-size:14px;
+    line-height:1.5;
+}
+
+.score-details strong{
+    color:var(--primary);
+}
+
+/* SMALL STAT BOXES */
+.small-stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.stat-pill{
+    flex:1 1 110px;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:13px;
+    border:1px solid var(--border);
+    background:#f9fafc;
+}
+
+.stat-label{
+    color:#666;
+    margin-bottom:4px;
+    font-size:12px;
+}
+
+.stat-value{
+    font-weight:bold;
+}
+
+/* RANK CARD */
+.rank-main{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.rank-box{
+    flex:1 1 120px;
+    border-radius:8px;
+    padding:10px 12px;
+    text-align:left;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    font-size:14px;
+}
+
+.rank-label{
+    font-size:12px;
+    color:#666;
+    margin-bottom:4px;
+}
+
+.rank-value{
+    font-weight:bold;
+    font-size:18px;
+}
+
+/* SECTION ANALYSIS TABLE */
+.section-table-wrapper{
+    width:100%;
+}
+
+.section-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.section-table th,
+.section-table td{
+    padding:7px 8px;
+    border:1px solid var(--border);
+    text-align:center;
+}
+
+.section-table th{
+    background:#f0f3fb;
+    font-weight:bold;
+}
+
+/* ACTION BUTTONS BOTTOM */
+.result-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:12px;
+}
+
+.btn{
+    padding:9px 16px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:#fff;
+}
+
+.btn-secondary{
+    background:#ecf0f7;
+    color:#333;
+    border:1px solid var(--border);
+}
+
+.btn-outline-danger{
+    background:#fff;
+    color:var(--danger);
+    border:1px solid var(--danger);
+}
+
+/* FOOTER NOTE */
+.footer-note{
+    font-size:12px;
+    color:#666;
+    margin-top:6px;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+    .result-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media (max-width:600px){
+    .top-bar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+    }
+    .top-right{
+        align-self:flex-start;
+    }
+    /* 👇 मोबाइल पर section table को horizontal scroll बनाना */
+    .section-table-wrapper{
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+    .section-table{
+        min-width:650px; /* जरूरत अनुसार आप 600-700 के बीच बदल सकते हैं */
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-left">
+        SelectBook | Test Result
+    </div>
+    <div class="top-right">
+        <span class="tag-success">Test Submitted Successfully</span>
+        <button class="btn-top" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+</div>
+
+<div class="result-wrapper">
+
+    <!-- TOP GRID: SUMMARY + RANK -->
+    <div class="result-grid">
+
+        <!-- LEFT: SCORE SUMMARY -->
+        <div class="card">
+            <div class="summary-header">
+                <div>
+                    <div class="test-name">RRB ALP (Assistant Loco Pilot) Demo Test</div>
+                    <div class="test-info">
+                        Attempt Date: 12 Jan 2025 &nbsp; | &nbsp;
+                        Duration: 60 Minutes &nbsp; | &nbsp;
+                        Total Questions: 75
+                    </div>
+                </div>
+                <div class="tag-success" style="background:#e3f2fd;color:var(--primary);">
+                    Demo Result (Sample Data)
+                </div>
+            </div>
+
+            <div class="score-main">
+                <div class="score-circle">
+                    <span id="score-obt">58</span>
+                    <div>Score / 75</div>
+                </div>
+
+                <div class="score-details">
+                    <div>Correct Questions: <strong id="correct">62</strong></div>
+                    <div>Incorrect Questions: <strong id="incorrect">10</strong></div>
+                    <div>Unattempted: <strong id="unattempted">3</strong></div>
+                    <div style="margin-top:6px;">
+                        Accuracy: <strong id="accuracy">86%</strong> &nbsp; | &nbsp;
+                        Overall Percentage: <strong id="percent">77%</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-stats">
+                <div class="stat-pill">
+                    <div class="stat-label">Time Taken</div>
+                    <div class="stat-value" id="time-taken">48 min 23 sec</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="stat-label">Attempted Questions</div>
+                    <div class="stat-value" id="attempted">72 / 75</div>
+                </div>
+                <div class="stat-pill">
+                    <div class="stat-label">Negative Marks</div>
+                    <div class="stat-value" id="negative">-3.3</div>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn btn-primary" onclick="reviewQuestions()">
+                    Review All Questions
+                </button>
+                <button class="btn btn-secondary">
+                    Download Result PDF
+                </button>
+                <button class="btn btn-outline-danger" onclick="window.location.href='exam-test.html'">
+                    Re-Attempt Test (Demo)
+                </button>
+            </div>
+
+            <div class="footer-note">
+                * अभी यह page केवल layout के लिए sample values दिखा रहा है।  
+                बाद में हम यहाँ पर असली score, rank और section-wise data Firebase / backend से भरेंगे।
+            </div>
+        </div>
+
+        <!-- RIGHT: RANK / PERCENTILE -->
+        <div class="card">
+            <div class="card-title">Rank &amp; Performance</div>
+
+            <div class="rank-main">
+                <div class="rank-box">
+                    <div class="rank-label">Overall Rank</div>
+                    <div class="rank-value" id="rank">125</div>
+                    <div style="font-size:12px;color:#777;">out of 4,500 students</div>
+                </div>
+
+                <div class="rank-box">
+                    <div class="rank-label">Percentile</div>
+                    <div class="rank-value" id="percentile">97.2</div>
+                    <div style="font-size:12px;color:#777;">Better than 97% students</div>
+                </div>
+
+                <div class="rank-box">
+                    <div class="rank-label">Overall Status</div>
+                    <div class="rank-value" style="font-size:16px;color:var(--success);" id="status">
+                        Good Performance
+                    </div>
+                    <div style="font-size:12px;color:#777;">Keep practising to reach Top 50</div>
+                </div>
+            </div>
+
+            <div style="margin-top:12px;font-size:13px;color:#555;">
+                अगले attempt के लिए suggestion: पहले <b>Reasoning</b> और <b>Maths speed</b> पर focus करें,
+                फिर Current Affairs revise करें। Regular mock test से percentile और बढ़ेगा।
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SECTION-WISE ANALYSIS -->
+    <div class="card">
+        <div class="card-title">Section-wise Analysis</div>
+
+        <!-- 🔹 नया wrapper जोड़ा है -->
+        <div class="section-table-wrapper">
+            <table class="section-table">
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Total Qs</th>
+                        <th>Attempted</th>
+                        <th>Correct</th>
+                        <th>Incorrect</th>
+                        <th>Score</th>
+                        <th>Accuracy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>25</td>
+                        <td>24</td>
+                        <td>20</td>
+                        <td>4</td>
+                        <td>18.7</td>
+                        <td>83%</td>
+                    </tr>
+                    <tr>
+                        <td>Reasoning</td>
+                        <td>25</td>
+                        <td>24</td>
+                        <td>21</td>
+                        <td>3</td>
+                        <td>20.0</td>
+                        <td>87%</td>
+                    </tr>
+                    <tr>
+                        <td>General Science</td>
+                        <td>15</td>
+                        <td>13</td>
+                        <td>10</td>
+                        <td>3</td>
+                        <td>8.5</td>
+                        <td>77%</td>
+                    </tr>
+                    <tr>
+                        <td>Current Affairs</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>9</td>
+                        <td>2</td>
+                        <td>10.8</td>
+                        <td>82%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- wrapper का end -->
+    </div>
+
+</div>
+
+<script>
+function reviewQuestions(){
+    // फिलहाल demo: बाद में इसे review-page पर ले जाएंगे
+    alert("Review layout बाद में जोड़ेंगे। अभी यह सिर्फ demo button है.");
+}
+</script>
+
+</body>
+</html>
