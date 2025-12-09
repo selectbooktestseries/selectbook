@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SelectBook | Demo CBT Test</title>
+
+<style>
+:root {
+    --primary: #00a9d6;        /* teal like Testbook */
+    --primary-dark: #008cb3;
+    --header-bg: #ffffff;
+    --border: #d4dde7;
+    --bg-soft: #f4f7fb;
+    --danger: #f35b4f;
+    --success: #3ab54a;
+    --text-main: #222;
+    --text-muted: #777;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #ffffff 0, #f4f7fb 40%, #e5edf7 100%);
+    color: var(--text-main);
+}
+
+/* HEADER: TIMER + FULLSCREEN */
+.top-bar {
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.timer-display {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: #fafafa;
+    font-weight: 600;
+    font-size: 15px;
+    gap: 2px;
+}
+.timer-box {
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: #263238;
+    color: #fff;
+    min-width: 26px;
+    text-align: center;
+    font-size: 13px;
+}
+.timer-colon {
+    font-size: 13px;
+    padding: 0 2px;
+}
+
+.btn-outline {
+    padding: 7px 16px;
+    border-radius: 4px;
+    background: #ffffff;
+    border: 1px solid var(--primary);
+    color: var(--primary-dark);
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.btn-outline:hover {
+    background: #e0f7ff;
+}
+
+/* SECOND BAR: SECTION / TEST TAB */
+.nav-bar {
+    background: #f9fbff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 14px;
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.nav-tab {
+    padding: 9px 18px;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid transparent;
+    border-bottom: none;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    color: #555;
+}
+.nav-tab.active {
+    background: #ffffff;
+    border-color: var(--border);
+    border-bottom: 1px solid #ffffff;
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* LAYOUT WRAPPER */
+.page-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 10px 18px;
+    display: flex;
+}
+
+/* QUESTION CONTAINER */
+.question-container {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid var(--border);
+    padding: 16px 18px 88px; /* नीचे button bar के लिए space */
+    min-height: calc(100vh - 130px);
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+
+/* QUESTION HEADER */
+.q-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.q-title {
+    font-weight: 650;
+    font-size: 18px;
+}
+
+.q-info-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #fff;
+}
+.chip-green {
+    background: var(--success);
+}
+.chip-red {
+    background: var(--danger);
+}
+.chip-label {
+    font-weight: 600;
+}
+
+.q-info-label {
+    font-size: 13px;
+    color: #555;
+    margin-right: 4px;
+}
+
+.q-time {
+    font-size: 14px;
+}
+
+/* language dropdown + alert */
+.q-header-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.select-small {
+    padding: 5px 24px 5px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    background: #fff;
+}
+.alert-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+}
+.alert-symbol {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #777;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+}
+
+/* QUESTION TEXT + OPTIONS */
+.q-body {
+    font-size: 15px;
+    line-height: 1.6;
+}
+.q-body p {
+    margin-bottom: 10px;
+}
+.options {
+    list-style: none;
+    margin-top: 4px;
+    padding-left: 0;
+}
+.options li {
+    margin-bottom: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+}
+.options li:hover {
+    background: #f4f9ff;
+}
+.options label {
+    cursor: pointer;
+}
+.options input {
+    margin-right: 6px;
+}
+
+/* BOTTOM BUTTON BAR */
+.bottom-bar {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 100%;
+    max-width: 1180px;
+    padding: 8px 10px 10px;
+    background: #eaf1f8;
+    border-top: 1px solid var(--border);
+}
+.bottom-inner {
+    background: #f9fcff;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between; /* left group + right group */
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bottom-left,
+.bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-flat {
+    padding: 9px 18px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+.btn-grey {
+    background: #e2efff;
+    color: #0a3b60;
+}
+.btn-teal {
+    background: var(--primary);
+    color: #fff;
+}
+.btn-teal:hover {
+    background: var(--primary-dark);
+}
+
+/* ========== PALETTE HANDLE (BLACK BAR) ========== */
+.palette-handle {
+    position: fixed;
+    top: 40%; /* थोड़ा ऊपर कर दिया */
+    right: 0;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 90px;
+    background: #222;
+    color: #fff;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+}
+.palette-handle span {
+    font-size: 18px;
+}
+
+/* ========== PALETTE OVERLAY PANEL ========== */
+.palette-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 92%;
+    height: 100vh;
+    background: #e5f4ff;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.25);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+}
+
+.palette-overlay.open {
+    transform: translateX(0);
+}
+
+.palette-header {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #b0c4de;
+}
+.user-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.palette-close {
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+}
+
+/* palette stats row */
+.palette-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    padding: 6px 14px 10px;
+    font-size: 13px;
+}
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.stat-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+.dot-answered { background:#3ab54a; }
+.dot-marked { background:#9c27b0; }
+.dot-marked-answered { background:#3ab54a; border:3px solid #9c27b0; }
+.dot-notvisited { background:#ffffff; border:1px solid #777; }
+.dot-notanswered { background:#f35b4f; }
+
+/* section title */
+.section-title {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* palette grid */
+.palette-grid {
+    flex: 1;
+    padding: 10px 14px 6px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px 6px;
+    overflow-y: auto; /* grid scroll, footer हमेशा नीचे दिखे */
+}
+.q-num-btn {
+    width: 38px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.q-num-btn.current {
+    border-width: 2px;
+    border-color: var(--primary);
+}
+.q-num-btn.answered {
+    background: #d2f5d8;
+    border-color: #2e7d32;
+}
+.q-num-btn.review {
+    background: #f3e5f5;
+    border-color: #8e24aa;
+}
+
+/* bottom buttons inside palette */
+.palette-footer {
+    padding: 8px 14px 12px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    flex-shrink: 0; /* हमेशा दिखे */
+}
+.palette-footer-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.btn-palette {
+    padding: 9px 12px;
+    border-radius: 4px;
+    border: 1px solid #a3c2d9;
+    background: #f3fbff;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-submit {
+    background: #ffeced;
+    border-color: #f4a6aa;
+    color: #c4373d;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+    .q-title {
+        font-size: 16px;
+    }
+    .q-header-top {
+        align-items: flex-start;
+    }
+    .top-bar {
+        flex-direction: row;
+        gap: 10px;
+    }
+    .timer-display {
+        font-size: 13px;
+    }
+    .page-wrapper{
+        padding:10px 4px 80px;
+    }
+    .question-container{
+        padding:12px 10px 96px;
+    }
+    .bottom-bar{
+        padding:6px 4px 8px;
+    }
+    .bottom-inner{
+        flex-direction:column;
+        align-items:stretch;
+    }
+    .bottom-left,
+    .bottom-right{
+        justify-content:space-between;
+    }
+    .btn-flat{
+        flex:1;
+        text-align:center;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR: TIMER + FULL SCREEN -->
+<div class="top-bar">
+    <div class="timer-display" id="timer">
+        <span class="timer-box" id="tm-hr">00</span>
+        <span class="timer-colon">:</span>
+        <span class="timer-box" id="tm-min">09</span>
+        <span class="timer-colon">:</span>
+        <span class="timer-box" id="tm-sec">59</span>
+    </div>
+
+    <button class="btn-outline" id="fs-btn">Full Screen</button>
+</div>
+
+<!-- SECOND NAV BAR -->
+<div class="nav-bar">
+    <button class="nav-tab">SECTIONS</button>
+    <button class="nav-tab active">Test</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrapper">
+    <div class="question-container">
+        <!-- HEADER TOP -->
+        <div class="q-header-top">
+            <div class="q-title">Question No. 1</div>
+
+            <div class="q-info-row">
+                <div>
+                    <span class="q-info-label">Marks</span>
+                    <span class="chip chip-green"><span class="chip-label">+1</span></span>
+                    <span class="chip chip-red" style="margin-left:4px;"><span class="chip-label">-0.33</span></span>
+                </div>
+
+                <div class="q-time">
+                    <span class="q-info-label">Time</span>
+                    01:30
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER bottom: language + alert -->
+        <div class="q-header-bottom">
+            <div style="display:flex;align-items:center;gap:6px;">
+                <span class="q-info-label">View in</span>
+                <select class="select-small">
+                    <option>Hindi</option>
+                    <option>English</option>
+                </select>
+            </div>
+
+            <div class="alert-icon">
+                <span class="alert-symbol">!</span>
+                <span>सूचित करें</span>
+            </div>
+        </div>
+
+        <!-- QUESTION BODY (loaded via JS) -->
+        <div class="q-body" id="q-body">
+            <!-- JS से 10 sample questions render होंगे -->
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM BUTTON BAR -->
+<div class="bottom-bar">
+    <div class="bottom-inner">
+        <div class="bottom-left">
+            <button class="btn-flat btn-grey" id="btn-prev">← Previous Question</button>
+            <button class="btn-flat btn-grey" id="btn-review">Mark for Review &amp; Next</button>
+            <button class="btn-flat btn-grey" id="btn-clear">Clear Response</button>
+        </div>
+        <div class="bottom-right">
+            <button class="btn-flat btn-teal" id="btn-next">Save &amp; Next →</button>
+        </div>
+    </div>
+</div>
+
+<!-- VERTICAL HANDLE -->
+<div class="palette-handle" id="palette-handle">
+    <span>&gt;</span>
+</div>
+
+<!-- PALETTE OVERLAY -->
+<div class="palette-overlay" id="palette">
+    <div class="palette-header">
+        <div class="user-info">
+            <div class="user-avatar"></div>
+            <div class="user-name">Demo Candidate</div>
+        </div>
+        <div class="palette-close" id="palette-close">&times;</div>
+    </div>
+
+    <div class="palette-stats">
+        <div class="stat-item">
+            <span class="stat-dot dot-answered"></span>
+            <span>Answered</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot dot-marked"></span>
+            <span>Marked for Review</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot dot-notvisited"></span>
+            <span>Not Visited</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot dot-notanswered"></span>
+            <span>Not Answered</span>
+        </div>
+    </div>
+
+    <div class="section-title">
+        SECTION : Demo Test (10 Questions)
+    </div>
+
+    <div class="palette-grid" id="palette-grid">
+        <!-- 1-10 buttons JS से बनेंगे -->
+    </div>
+
+    <div class="palette-footer">
+        <div class="palette-footer-buttons">
+            <button class="btn-palette" onclick="openQuestionPaper()">Question Paper</button>
+            <button class="btn-palette" onclick="openInstructions()">Instructions</button>
+            <button class="btn-palette btn-submit" onclick="submitTest()">Submit Test</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ---------- SAMPLE QUESTIONS (10) ---------- */
+const questions = [
+    {
+        id: 1,
+        text: "भारत का संविधान सभा के स्थायी अध्यक्ष कौन थे?",
+        options: [
+            "डॉ. राजेन्द्र प्रसाद",
+            "डॉ. भीमराव अंबेडकर",
+            "जवाहरलाल नेहरू",
+            "सरदार पटेल"
+        ]
+    },
+    {
+        id: 2,
+        text: "रेलवे में पटरियों के बीच की मानक दूरी (गौज) कितनी होती है?",
+        options: [
+            "1,000 मिमी",
+            "1,435 मिमी",
+            "1,676 मिमी",
+            "762 मिमी"
+        ]
+    },
+    {
+        id: 3,
+        text: "निम्न में से कौन-सा राजस्थान का मरुस्थलीय क्षेत्र है?",
+        options: [
+            "हाड़ौती",
+            "मेवाड़",
+            "मरवाड़",
+            "ढूंढाड़"
+        ]
+    },
+    {
+        id: 4,
+        text: "कंप्यूटर में CPU को किस नाम से जाना जाता है?",
+        options: [
+            "मेमोरी",
+            "प्रोसेसर",
+            "मदरबोर्ड",
+            "हार्ड डिस्क"
+        ]
+    },
+    {
+        id: 5,
+        text: "किस नदी को ‘बिहार की जीवन रेखा’ कहा जाता है?",
+        options: [
+            "नर्मदा",
+            "गंगा",
+            "कोसी",
+            "सोन"
+        ]
+    },
+    {
+        id: 6,
+        text: "घर्षण बल किस दिशा में कार्य करता है?",
+        options: [
+            "वस्तु के गति की दिशा में",
+            "वस्तु के गति की विपरीत दिशा में",
+            "ऊर्ध्व दिशा में",
+            "किसी दिशा में नहीं"
+        ]
+    },
+    {
+        id: 7,
+        text: "‘Ctrl + C’ शॉर्टकट कुंजी का प्रयोग किसके लिए होता है?",
+        options: [
+            "कॉपी करने के लिए",
+            "कट करने के लिए",
+            "पेस्ट करने के लिए",
+            "बंद करने के लिए"
+        ]
+    },
+    {
+        id: 8,
+        text: "SSC CGL परीक्षा किस संस्था द्वारा आयोजित की जाती है?",
+        options: [
+            "UPSC",
+            "SSC",
+            "RRB",
+            "IBPS"
+        ]
+    },
+    {
+        id: 9,
+        text: "भारतीय संविधान की प्रस्तावना में भारत को किस प्रकार का गणराज्य कहा गया है?",
+        options: [
+            "संप्रभु, समाजवादी, धर्मनिरपेक्ष, लोकतांत्रिक गणराज्य",
+            "संप्रभु, लोकतांत्रिक, गणराज्य",
+            "धर्मनिरपेक्ष, लोकतांत्रिक, गणराज्य",
+            "संघीय, लोकतांत्रिक, गणराज्य"
+        ]
+    },
+    {
+        id: 10,
+        text: "‘रेलवे प्रोटेक्शन फोर्स (RPF)’ मुख्यतः किस कार्य के लिए जानी जाती है?",
+        options: [
+            "टिकट चेकिंग",
+            "रेलवे संपत्ति व यात्रियों की सुरक्षा",
+            "ट्रेन चलाना",
+            "स्टेशन प्रबंधन"
+        ]
+    }
+];
+
+let currentIndex = 0;
+const userAnswers = new Array(questions.length).fill(null);
+const reviewStatus = new Array(questions.length).fill(false);
+
+/* ---------- RENDER QUESTION ---------- */
+function renderQuestion(index) {
+    currentIndex = index;
+    const q = questions[index];
+    const qTitleEl = document.querySelector(".q-title");
+    const bodyEl = document.getElementById("q-body");
+
+    qTitleEl.textContent = "Question No. " + (index + 1);
+
+    let html = "";
+    html += "<p>" + q.text + "</p>";
+    html += '<ul class="options">';
+    q.options.forEach((opt, i) => {
+        const checked = userAnswers[index] === i ? "checked" : "";
+        html += `
+            <li>
+                <label>
+                    <input type="radio" name="q${index}" value="${i}" ${checked}
+                        onclick="selectOption(${index}, ${i})" />
+                    ${opt}
+                </label>
+            </li>`;
+    });
+    html += "</ul>";
+
+    bodyEl.innerHTML = html;
+
+    // palette current highlighting
+    const buttons = document.querySelectorAll(".q-num-btn");
+    buttons.forEach((btn, i) => {
+        btn.classList.toggle("current", i === index);
+    });
+}
+
+/* ---------- SELECT OPTION ---------- */
+function selectOption(qIndex, optIndex) {
+    userAnswers[qIndex] = optIndex;
+
+    // palette में answered colour
+    const btn = document.querySelectorAll(".q-num-btn")[qIndex];
+    btn.classList.add("answered");
+    btn.classList.remove("review");
+}
+
+/* ---------- NAVIGATION BUTTONS ---------- */
+document.getElementById("btn-next").addEventListener("click", () => {
+    // Save & Next
+    if (currentIndex < questions.length - 1) {
+        renderQuestion(currentIndex + 1);
+    } else {
+        // आखिरी प्रश्न पर Save & Next → submit popup
+        const ok = confirm("आप आखिरी प्रश्न पर हैं। क्या आप टेस्ट सबमिट करना चाहते हैं?");
+        if (ok) {
+            submitTest();
+        }
+    }
+});
+
+document.getElementById("btn-prev").addEventListener("click", () => {
+    // Previous Question
+    if (currentIndex > 0) {
+        renderQuestion(currentIndex - 1);
+    }
+});
+
+document.getElementById("btn-clear").addEventListener("click", () => {
+    // Clear response
+    userAnswers[currentIndex] = null;
+    reviewStatus[currentIndex] = false;
+    renderQuestion(currentIndex);
+    const btn = document.querySelectorAll(".q-num-btn")[currentIndex];
+    btn.classList.remove("answered", "review");
+});
+
+document.getElementById("btn-review").addEventListener("click", () => {
+    // Mark for review & Next
+    reviewStatus[currentIndex] = true;
+    const btn = document.querySelectorAll(".q-num-btn")[currentIndex];
+    btn.classList.add("review");
+    if (currentIndex < questions.length - 1) {
+        renderQuestion(currentIndex + 1);
+    } else {
+        const ok = confirm("आप आखिरी प्रश्न पर हैं और इसे Mark for Review किया गया है। क्या आप टेस्ट सबमिट करना चाहते हैं?");
+        if (ok) submitTest();
+    }
+});
+
+/* ---------- BUILD PALETTE BUTTONS (1–10) ---------- */
+const paletteGrid = document.getElementById("palette-grid");
+for (let i = 0; i < questions.length; i++) {
+    const btn = document.createElement("button");
+    btn.className = "q-num-btn";
+    if (i === 0) btn.classList.add("current");
+    btn.textContent = i + 1;
+    btn.addEventListener("click", () => renderQuestion(i));
+    paletteGrid.appendChild(btn);
+}
+
+/* ---------- FULL SCREEN ---------- */
+const fsBtn = document.getElementById("fs-btn");
+
+function updateFsText() {
+    if (document.fullscreenElement) {
+        fsBtn.textContent = "Exit Full Screen";
+    } else {
+        fsBtn.textContent = "Full Screen";
+    }
+}
+
+fsBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+});
+
+document.addEventListener("fullscreenchange", updateFsText);
+
+/* ---------- TIMER (simple demo) ---------- */
+let totalSeconds = 9 * 60 + 59; // 09:59 demo
+
+function pad(n) {
+    return n.toString().padStart(2, "0");
+}
+function updateTimer() {
+    const hr = Math.floor(totalSeconds / 3600);
+    const min = Math.floor((totalSeconds % 3600) / 60);
+    const sec = totalSeconds % 60;
+    document.getElementById("tm-hr").textContent = pad(hr);
+    document.getElementById("tm-min").textContent = pad(min);
+    document.getElementById("tm-sec").textContent = pad(sec);
+    if (totalSeconds > 0) {
+        totalSeconds--;
+    }
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+/* ---------- PALETTE OPEN/CLOSE ---------- */
+const palette = document.getElementById("palette");
+const handle = document.getElementById("palette-handle");
+const closeBtn = document.getElementById("palette-close");
+
+handle.addEventListener("click", () => {
+    palette.classList.add("open");
+});
+
+closeBtn.addEventListener("click", () => {
+    palette.classList.remove("open");
+});
+
+// overlay के बाहर click करने पर close (optional)
+document.addEventListener("click", (e) => {
+    if (
+        palette.classList.contains("open") &&
+        !palette.contains(e.target) &&
+        e.target !== handle &&
+        !handle.contains(e.target)
+    ) {
+        palette.classList.remove("open");
+    }
+});
+
+/* ---------- QUESTION PAPER / INSTRUCTIONS / SUBMIT ---------- */
+function openQuestionPaper(){
+    // अभी के लिए: palette बंद करके current प्रश्न view पर ही रहेंगे
+    palette.classList.remove("open");
+    // चाहें तो यहाँ scrollTop या कोई extra view add कर सकते हैं
+}
+
+function openInstructions(){
+    // instructions page पर redirect
+    window.location.href = "exam-instructions.html";
+}
+
+/* ---------- SUBMIT TEST (Flow to exam-result.html) ---------- */
+function submitTest() {
+    // अभी के लिए simple redirect (flow: exam-test → exam-result)
+    window.location.href = "exam-result.html";
+}
+
+/* ---------- INITIAL RENDER ---------- */
+renderQuestion(0);
+</script>
+</body>
+</html>
