@@ -1,0 +1,724 @@
+{
+  "testId": "TRACK_MACHINE_RANDOM_70",
+  "subject": "Track Machine / Lining / Measurement",
+  "language": "English",
+  "time": 70,
+  "questions": [
+    {
+      "id": 1,
+      "text": "Lining systems are used on which machines?",
+      "options": ["CSM 8x only", "UNO & DUO only", "All tamping machines", "All track machines"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 2,
+      "text": "What is the versine formula for CSM in three point lining method?",
+      "options": ["H = 25000 / R", "H = 20367 / R", "H = 29000 / R", "H = 15000 / R"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 3,
+      "text": "In Plasser tampers, direction of Cant Selector switch is to be always kept?",
+      "options": ["Same side", "Opposite to base rail", "Does not matter", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 4,
+      "text": "Versine ratio in four point lining method for CSM is?",
+      "options": ["1.33", "1.2157", "1.6221", "1.507"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 5,
+      "text": "LASER lining is used on straight track in 3-point mode to remove?",
+      "options": ["Long misalignment", "Short misalignment", "Twist", "Cant"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 6,
+      "text": "Which instrument is best suited for measuring very high temperatures (above 1500°C) without physical contact?",
+      "options": ["Thermocouple", "Bimetallic thermometer", "RTD", "Pyrometer"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 7,
+      "text": "Versine of curved track depends on?",
+      "options": ["Radius of curve", "Measuring chord length", "Measurement method", "All of these"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 8,
+      "text": "Slew potentiometer converts slew value to electrical signal at the rate of?",
+      "options": ["25 mm/mm", "50 mm/mm", "2 mm/mm", "10 mm/mm"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 9,
+      "text": "The output of the rear pendulum serves how many functions in CSM?",
+      "options": ["1", "2", "3", "4"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 10,
+      "text": "In 3-point lining method, number of trolleys used is?",
+      "options": ["1", "2", "3", "4"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 11,
+      "text": "Which machines are equipped with Automatic Guiding Computer (ALC)?",
+      "options": ["Tamping Express", "UNIMAT", "UNO & DUO", "All"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 12,
+      "text": "Front pendulum is used for sending signals in tamping machine for?",
+      "options": ["Versine", "Cross level", "Longitudinal level", "Both a & b"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 13,
+      "text": "Residual error in four point lining in design mode is?",
+      "options": ["Fd/n", "H", "H/2", "Zero"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 14,
+      "text": "In smoothing mode, longitudinal level and cross-level are corrected?",
+      "options": ["Completely", "Not completely", "Cannot say", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 15,
+      "text": "Constant versine ratio is valid only for track having?",
+      "options": ["Variable radius", "Spiral curve", "Parabolic curve", "Circular curve"],
+      "answer": 3,
+      "marks": 1
+    },
+
+    {
+      "id": 16,
+      "text": "Which gauge is typically made of a series of leaves marked with thickness?",
+      "options": ["Radius gauge", "Plug gauge", "Feeler gauge", "Screw pitch gauge"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 17,
+      "text": "Radius of straight track is considered as?",
+      "options": ["Zero", "Infinite", "Depends on length", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 18,
+      "text": "Residual error ratio in lifting for UNO/DUO machine is?",
+      "options": ["1.33", "2.775", "3.326", "1.507"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 19,
+      "text": "Slip gauges are primarily used for?",
+      "options": ["Measuring fluid pressure", "Calibration of instruments", "Checking taper", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 20,
+      "text": "Least count of conventional outside micrometer screw gauge is?",
+      "options": ["0.02 mm", "0.01 mm", "0.05 mm", "0.1 mm"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 21,
+      "text": "In lining system, smoothing mode may be used in?",
+      "options": ["4-point lining", "3-point lining", "Both", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 22,
+      "text": "Design mode may be used in?",
+      "options": ["4-point lining", "3-point lining", "Both", "None"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 23,
+      "text": "Versine compensation value (Vm) depends on?",
+      "options": ["Radius only", "Transition length only", "Radius & transition length", "None"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 24,
+      "text": "Direction of toggle switch for Vm when entering from higher radius to lower radius is?",
+      "options": ["Outer side", "Inner side", "Either side", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 25,
+      "text": "Constant for versine compensation value (Vm) for CSM is?",
+      "options": ["8400", "8325", "8500", "9000"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 26,
+      "text": "Residual error in four point lining method is approximately?",
+      "options": ["Equal to 3-point", "Double", "Half of 3-point", "Zero"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 27,
+      "text": "In 3-point lining method, versine is measured at?",
+      "options": ["Point A", "Point B", "Point C", "Point D"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 28,
+      "text": "Trolleys in lining system are pressed against?",
+      "options": ["Inner rail", "Outer rail", "Both rails", "Base rail"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 29,
+      "text": "Error reduction ratio in 3-point lining method is?",
+      "options": ["BD / BC", "BC / BD", "AD / BC", "AB / BD"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 30,
+      "text": "Value of residual error in three point lining method for CSM is?",
+      "options": ["3.13", "1.33", "1.91", "2.91"],
+      "answer": 2,
+      "marks": 1
+    },
+
+    {
+      "id": 31,
+      "text": "Versine of straight track is?",
+      "options": ["Maximum", "Minimum", "Zero", "Variable"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 32,
+      "text": "General lift or run-in & run-out ramp for tamping is?",
+      "options": ["1 in 200", "1 in 1000", "1 in 150", "1 in 500"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 33,
+      "text": "In ALC measuring mode, track can be measured in?",
+      "options": ["Forward direction", "Reverse direction", "Both", "None"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 34,
+      "text": "Long wave track geometry faults become significant with?",
+      "options": ["Load", "Temperature", "Increase in speed", "Decrease in speed"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 35,
+      "text": "In ALC working, lining system has to be set to?",
+      "options": ["4-point lining", "3-point lining", "Design mode", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 36,
+      "text": "Slew potentiometer is provided in front cabin on panel?",
+      "options": ["B1", "B2", "B3", "B4"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 37,
+      "text": "Tamping machine corrects leveling error in?",
+      "options": ["One mode", "Two modes", "Three modes", "Four modes"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 38,
+      "text": "In smoothing mode, general lift over base rail is?",
+      "options": ["Fixed", "Variable", "Zero", "Maximum"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 39,
+      "text": "In design mode, which defect is removed?",
+      "options": ["Short wave", "Long wave", "Twist", "Cant"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 40,
+      "text": "General lift should always be _____ than the high point?",
+      "options": ["Less", "More", "Equal", "Zero"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 41,
+      "text": "For single insertion, normal general lift in PSC sleeper track is?",
+      "options": ["10 mm", "20 mm", "30 mm", "50 mm"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 42,
+      "text": "For double insertion, general lift value in PSC sleeper should not exceed?",
+      "options": ["20 mm", "25 mm", "30 mm", "40 mm"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 43,
+      "text": "In levelling system, number of height transducers are?",
+      "options": ["One", "Two", "Three", "Four"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 44,
+      "text": "Longitudinal levels are measured by?",
+      "options": ["Pendulum", "General lift potentiometer", "Height transducer", "Cant potentiometer"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 45,
+      "text": "Front pendulum is used for correction of?",
+      "options": ["Longitudinal level", "Cross level", "Twist", "Cant"],
+      "answer": 0,
+      "marks": 1
+    },
+
+    {
+      "id": 46,
+      "text": "Middle pendulum in levelling system is used for?",
+      "options": ["Cross level", "Indication of cross level", "Cant", "Twist"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 47,
+      "text": "Recording of cross level is done with help of?",
+      "options": ["Front pendulum", "Measuring pendulum", "Rear pendulum", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 48,
+      "text": "In ALC, correction mode available is?",
+      "options": ["One", "Two", "Three", "Four"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 49,
+      "text": "Super-elevation potentiometer is provided in which cabin?",
+      "options": ["Front", "Rear", "Both", "None"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 50,
+      "text": "Correction value can be calculated by formula?",
+      "options": ["K × 100 × SE / R", "K × SE", "K × 50 × SE", "None"],
+      "answer": 0,
+      "marks": 1
+    },
+
+    {
+      "id": 51,
+      "text": "Primary use of feeler gauge is to?",
+      "options": ["Measure radius", "Check pitch", "Measure gap", "Measure surface roughness"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 52,
+      "text": "Least count of conventional outside micrometer screw gauge is?",
+      "options": ["0.1 mm", "0.01 mm", "0.02 mm", "0.05 mm"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 53,
+      "text": "Function of ratchet stop in micrometer is to?",
+      "options": ["Lock spindle", "Provide uniform pressure", "Increase speed", "Reduce wear"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 54,
+      "text": "Gauge used to check diameter and accuracy of internal threads is?",
+      "options": ["Thread ring gauge", "Feeler gauge", "Thread plug gauge", "Snap gauge"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 55,
+      "text": "Pressure gauge measures?",
+      "options": ["Electrical resistance", "Rate of flow", "Force per unit area", "Volume"],
+      "answer": 2,
+      "marks": 1
+    },
+
+    {
+      "id": 56,
+      "text": "Bourdon tube gauge is used to measure?",
+      "options": ["Liquid flow rate", "Pressure of fluids", "Electrical current", "Temperature"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 57,
+      "text": "Shape of pressure sensing element in Bourdon tube is?",
+      "options": ["Straight tube", "Diaphragm", "C-shaped tube", "Bellows"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 58,
+      "text": "Slip gauges are also known as?",
+      "options": ["Plug gauges", "Gauge blocks", "Snap gauges", "Feeler gauges"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 59,
+      "text": "Joining slip gauges to build a dimension is called?",
+      "options": ["Sliding", "Wringing", "Fitting", "Locking"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 60,
+      "text": "Reference surface used with Vernier height gauge is?",
+      "options": ["Datum surface", "Top surface", "Contact surface", "Scriber tip"],
+      "answer": 0,
+      "marks": 1
+    },
+
+    {
+      "id": 61,
+      "text": "Gauge used to check outer diameter of shaft is?",
+      "options": ["Plug gauge", "Feeler gauge", "Ring gauge", "Bore gauge"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 62,
+      "text": "Depth micrometer provides higher accuracy because?",
+      "options": ["Larger scale", "Micrometer principle", "Reference surface", "Digital display"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 63,
+      "text": "“No-Go” plug gauge ensures hole dimension does not exceed?",
+      "options": ["Minimum limit", "Lower tolerance", "Maximum limit", "Nominal size"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 64,
+      "text": "Primary characteristic of E6013 electrode is?",
+      "options": ["Cellulosic coating", "Low hydrogen coating", "Iron powder", "Rutile coating"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 65,
+      "text": "Gauge having blades marked with thickness for small gaps is?",
+      "options": ["Radius gauge", "Plug gauge", "Feeler gauge", "Wire gauge"],
+      "answer": 2,
+      "marks": 1
+    },
+
+    {
+      "id": 66,
+      "text": "Least count of micrometer having 0.5 mm pitch & 50 divisions is?",
+      "options": ["0.02 mm", "0.01 mm", "0.05 mm", "0.1 mm"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 67,
+      "text": "Instrument used to measure current is?",
+      "options": ["Voltmeter", "Galvanometer", "Ohmmeter", "Ammeter"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 68,
+      "text": "Instrument based on bimetallic junction principle is?",
+      "options": ["Thermocouple", "Pressure gauge", "RTD", "Pyrometer"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 69,
+      "text": "Go gauge checks?",
+      "options": ["Lower limit", "Upper limit", "Surface finish", "Flatness"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 70,
+      "text": "Gauge used to check pitch of screw threads is?",
+      "options": ["Feeler gauge", "Radius gauge", "Screw pitch gauge", "Plug gauge"],
+      "answer": 2,
+      "marks": 1
+    }
+    {
+      "id": 1,
+      "text": "What is the standard gauge for Broad Gauge on Indian Railways?",
+      "options": ["1435 mm", "1520 mm", "1676 mm", "1000 mm"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 2,
+      "text": "What is the primary objective of track maintenance?",
+      "options": ["Increase speed", "Reduce cost", "Restore best possible condition", "None of the above"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 3,
+      "text": "Track Recording Car measures which rail geometry parameter except?",
+      "options": ["Gauge", "Alignment", "Unevenness", "Twist"],
+      "answer": 3,
+      "marks": 1
+    },
+    {
+      "id": 4,
+      "text": "What material is predominantly used for sleepers on Indian Railways?",
+      "options": ["Steel", "Cast Iron", "Concrete", "Wood"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 5,
+      "text": "What is the term TQI short for?",
+      "options": ["Track Quality Index", "Track Quality Inspection", "Track Queue Identification", "Track Quantity Index"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 6,
+      "text": "Which maintenance limit necessitates speed reduction?",
+      "options": ["Planned Maintenance Limit", "Need Based Maintenance Limit", "Urgent Maintenance Limit", "Routine Limit"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 7,
+      "text": "Which joint is installed at the ends of LWR/CWR for expansion?",
+      "options": ["Fishplate Joint", "Butt Joint", "Switch Expansion Joint", "Welded Joint"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 8,
+      "text": "What should be the minimum sleeper density for main lines?",
+      "options": ["1900/km", "1660/km", "800/km", "1200/km"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 9,
+      "text": "Which instrument is used to measure gauge?",
+      "options": ["Vernier caliper", "Gauge meter", "Barometer", "Accelerometer"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 10,
+      "text": "What is Cant deficiency?",
+      "options": ["Excess cant for slow speed", "Lack of cant at higher speed", "Cant gradient", "None of the above"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 11,
+      "text": "What is the recommended ballast profile depth for speeds up to 160 kmph?",
+      "options": ["150 mm", "200 mm", "300 mm", "350 mm"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 12,
+      "text": "Which manual is referred for instructions regarding track machines?",
+      "options": ["Track Management System Manual", "IRCA Manual", "Indian Railways Track Machine Manual", "IRSOD Manual"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 13,
+      "text": "What is the main use of joggled fishplates?",
+      "options": ["Expansion gaps", "Welded rail joints", "Rail anchoring", "Rail closure"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 14,
+      "text": "Who is responsible for checking stores of SSE/P.Way?",
+      "options": ["ADEN", "DEN", "JE/SSE/P.Way", "SSE Works In-Charge"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 15,
+      "text": "Which device is used to physically stretch rails during de-stressing?",
+      "options": ["Rail tensor", "Fishplate", "Rail jack", "Crow bar"],
+      "answer": 0,
+      "marks": 1
+    },
+
+    {
+      "id": 16,
+      "text": "What is the meaning of Gauge in track geometry?",
+      "options": ["Distance from rail head to ballast", "Distance between sleeper faces", "Distance between inner faces of rails", "Height of rail above sleeper"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 17,
+      "text": "What speed restriction is imposed immediately after deep screening manually in BG line?",
+      "options": ["30 kmph", "20 kmph", "45 kmph", "50 kmph"],
+      "answer": 0,
+      "marks": 1
+    },
+    {
+      "id": 18,
+      "text": "Minimum radius of curves for Broad Gauge track is approximately?",
+      "options": ["150 m", "175 m", "180 m", "200 m"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 19,
+      "text": "What is the prescribed frequency for curve inspection by Sectional PWI?",
+      "options": ["Once in six months", "Once in three months", "Once in two months", "None"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 20,
+      "text": "What is super-elevation with respect to track?",
+      "options": ["Amount of ballast depth", "Height of rail head above sleeper", "Height by which outer rail is raised above inner rail", "Rail inclination"],
+      "answer": 2,
+      "marks": 1
+    },
+
+    {
+            "id": 21,
+      "text": "Which type of sleeper provides best rigidity of track?",
+      "options": ["Wooden", "Steel", "Concrete", "Cast iron"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 22,
+      "text": "What is the primary function of ballast?",
+      "options": ["Speed regulation", "Drainage", "Track stability and load distribution", "Sound insulation"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 23,
+      "text": "Which of the following is a common defect in rails?",
+      "options": ["Buckling", "Splitting", "Corrugation", "Bridging"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 24,
+      "text": "Which type of rail joint is preferred to minimize noise and shock?",
+      "options": ["Fishplate joint", "Welded joint", "Chair joint", "Butt joint"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 25,
+      "text": "The term Cant is primarily related to?",
+      "options": ["Longitudinal alignment", "Elevation difference of rails on a curve", "Rail wear", "Track irregularities"],
+      "answer": 1,
+      "marks": 1
+    },
+
+    {
+      "id": 26,
+      "text": "What is the usual sleeper spacing for BG mainline track?",
+      "options": ["500 mm", "600 mm", "650–700 mm", "800 mm"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 27,
+      "text": "Which of the following is NOT a track irregularity?",
+      "options": ["Gauge variation", "Alignment defect", "Rail breakage", "Longitudinal level fault"],
+      "answer": 2,
+      "marks": 1
+    },
+    {
+      "id": 28,
+      "text": "What is the main cause of rail temperature variation?",
+      "options": ["Weather changes", "Ambient temperature and sunlight", "Ballast insulation", "Rail type"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 29,
+      "text": "What is the normal length of a rail used in BG track?",
+      "options": ["10 m", "13 m", "18 m", "26 m"],
+      "answer": 1,
+      "marks": 1
+    },
+    {
+      "id": 30,
+      "text": "What does P-Way stand for?",
+      "options": ["Permanent Waterway", "Project Way", "Permanent Way", "Passage Way"],
+      "answer": 2,
+      "marks": 1
+    }
+  ]
+}
